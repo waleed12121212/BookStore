@@ -1,12 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BookStore.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
 {
     public class CategoriesController : Controller
     {
+        ApplicationDbContext context;
+        public CategoriesController(ApplicationDbContext context)
+        {
+            this.context = context;
+        }
         public IActionResult Index( )
         {
-            return View();
+            var categories = context.Categories.ToList();
+            return View(categories);
         }
     }
 }
